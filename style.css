@@ -1,0 +1,333 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #48a30012;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Heading styles */
+  .title {
+    font-size: 64px;
+    color: #48a300;
+    text-align: center;
+  }
+  
+  .title span {
+    color: #61481c;
+    font-weight: 700;
+  }
+  
+  /* Container for the app */
+  main {
+    padding: 0 16px 32px;
+  }
+  
+  .appContainer {
+    background-color: #fbfbfb;
+    max-width: 660px;
+    margin: auto;
+    border-radius: 15px;
+    padding: 32px 48px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Subtitle + icon */
+  .subTitle {
+    font-weight: bold;
+  }
+  
+  .sun-icon {
+    vertical-align: middle;
+    margin-left: 15px;
+  }
+  
+  /* Progress bar section */
+  .progress-Label {
+    font-size: 14px;
+    color: #858585;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar {
+    height: 24px;
+    background-color: rgba(72, 163, 0, 0.1);
+    border-radius: 15px;
+    margin-bottom: 45px;
+    position: relative;
+  }
+
+  
+  
+  .progress-value {
+    height: 100%;
+    width: 0;
+    background-color: #48a300;
+    border-radius: 15px;
+    font-weight: 500;
+    font-size: 10px;
+    color: #eeffe0;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    visibility: hidden;
+    transition: width 0.3s ease;
+  }
+  
+  .progress-value span {
+    padding-left: 20px;
+  }
+  
+  /* Error label (shown only when error class is added) */
+  .error-label {
+    font-size: 14px;
+    color: #ea0e0e;
+    margin: 10px 0 20px;
+    display: none;
+  }
+  
+  .showError .error-label {
+    display: block;
+  }
+  
+  /* Goal container styles */
+  .goleContainer {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 17px;
+    height: 82px;
+    display: flex;
+    align-items: center;
+    padding: 0 22px;
+    background-color: #ffffff;
+    margin-bottom: 42px;
+    gap: 18px;
+  }
+  
+  /* Checkbox circle */
+  .checkBox {
+    height: 24px;
+    width: 24px;
+    border: 2px solid #61481c4d;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .check-icon {
+    display: none;
+  }
+  
+  /* When completed */
+  .completed .checkBox {
+    background-color: #48a300;
+    border-color: #48a300;
+  }
+  
+  .completed .check-icon {
+    display: block;
+  }
+  
+  .completed .goleInput {
+    color: #48a300;
+    text-decoration: line-through;
+  }
+  
+  /* Input styling */
+  .goleInput {
+    border: none;
+    outline: none;
+    padding-left: 22px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    align-self: stretch;
+  }
+  
+  /* Placeholder styling */
+  .goleInput::placeholder {
+    color: #d9d9d9;
+  }
+  
+  /* Footer text */
+  .quote {
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  .made-with {
+    font-weight: 500;
+    font-size: 12px;
+    text-align: center;
+    color: #858585;
+    margin: 25px 0 20px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 760px) {
+    .title {
+      font-size: 32px;
+    }
+  
+    .appContainer {
+      padding: 16px 32px;
+    }
+  
+    .goleContainer {
+      height: 64px;
+      margin-bottom: 24px;
+      border-radius: 14px;
+    }
+  
+    .checkBox {
+      height: 20px;
+      width: 20px;
+    }
+  }
+  
+
+  /* Guide card container */
+.guideCard {
+   background-color: #f0fbe6; 
+    /* border-left: 6px solid #48a300; */
+    border-top: 6px solid #48a300;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin: 0 auto 32px; /* center horizontally + space below */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    width: 100%;
+    text-align: left;
+    margin-top: 40px;
+  }
+  
+  /* Title style */
+  .guideTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #48a300;
+    margin-bottom: 12px;
+  }
+  
+  /* Step list style */
+  .guideSteps {
+    list-style: none;
+    font-size: 15px;
+    color: #555;
+    padding-left: 18px;
+  }
+  
+  .guideSteps li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  /* Responsive tweaks for smaller screens */
+  @media (max-width: 480px) {
+    .guideCard {
+      padding: 16px 18px;
+    }
+  
+    .guideTitle {
+      font-size: 16px;
+    }
+  
+    .guideSteps {
+      font-size: 14px;
+      padding-left: 16px;
+    }
+  }
+  .add-goal-btn {
+    background-color: #48a300;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    /* margin: 0 auto 20px; */
+    margin-bottom: 50px;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  
+  .add-goal-btn:hover {
+    background-color: #3b8700;
+  }
+  
+
+  .delete-btn {
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-left: 10px;
+    color: red;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+  }
+  
+  .delete-btn:hover {
+    transform: scale(1.3);
+  }
+  
+  /* Fade-out animation */
+  .goleContainer.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .developerSection {
+    background-color: #f0fbe6; 
+    padding: 30px 20px;
+    font-family: 'Poppins', sans-serif;
+    color: #2c2c2c;
+    text-align: center;
+  }
+  
+  .developerCard {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  
+  .developerCard p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .developerCard strong {
+    font-weight: bold;
+  }
+  
+  .developerCard em {
+    font-style: italic;
+  }
+  
+  .socialIcons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .socialIcons a img {
+    width: 20px;
+    height: 20px;
+    border-radius: 30%;
+    transition: transform 0.3s;
+  }
+  
+  .socialIcons a:hover img {
+    transform: scale(1.1);
+  }
+  
+  
