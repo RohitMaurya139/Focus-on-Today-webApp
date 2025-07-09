@@ -15,7 +15,7 @@ Welcome to **Focus on Today**, a minimal daily goal tracking web app built using
 ```html
 <html lang="en">
 ```
-- Root element of the webpage, with language set to English.
+- The root element of the webpage, with the lang="en" attribute to indicate the language is English.
 
 ### `<head>` Section
 
@@ -60,12 +60,26 @@ Welcome to **Focus on Today**, a minimal daily goal tracking web app built using
 ```html
 <h1 class="title">Focus on <span>Today</span></h1>
 ```
-- Main heading with a span element for custom styling.
+-Main heading. The <span> can be styled differently using CSS.
 
 ```html
 <div class="appContainer">...</div>
 ```
-- Contains the entire interactive section.
+```
+Holds the entire interactive part of the app.
+
+-<h2 class="subTitle"> – Smaller title with a sun icon.
+
+-<p class="progress-Label"> – Motivation label.
+
+-.progress-bar – Progress tracking UI.
+
+-.goleWrapper – Dynamic task list container.
+
+-"Add Task" button – Adds a new task.
+
+-Quotes and Developer section.
+```
 
 ```html
 <h2 class="subTitle">...</h2>
@@ -106,7 +120,21 @@ Welcome to **Focus on Today**, a minimal daily goal tracking web app built using
 ```js
 const allGoals = JSON.parse(localStorage.getItem("allGoals")) || {};
 ```
-- Retrieves saved tasks or initializes an empty object.
+```
+✅ What it does:
+-localStorage.getItem("allGoals"): gets saved task data (in string format).
+
+-JSON.parse(...): converts that string into a JS object.
+
+- {}: if nothing was saved before (null), use an empty object.
+
+-🔑 Keywords & methods:
+-const: creates a constant variable.
+
+-JSON.parse(): parses JSON string into a JavaScript object.
+
+-localStorage: browser storage for saving data permanently (until cleared).
+```
 
 ### DOM Element Selection
 
@@ -116,7 +144,13 @@ const progressValue = document.querySelector(".progress-value");
 const goalWrapper = document.querySelector(".goleWrapper");
 const addGoalBtn = document.querySelector(".add-goal-btn");
 ```
-- Selects essential DOM elements for interaction.
+```
+✅ What it does:
+-Finds HTML elements using their CSS class names so you can control them with JS.
+
+🔑 Methods:
+-document.querySelector(): selects the first matching element in the document.
+```
 
 ### Update Progress Bar Function
 
@@ -132,7 +166,25 @@ function updateProgress() {
 }
 ```
 
-- Calculates and displays completion stats.
+```
+✅ What it does:
+-Counts total and completed goals.
+
+-Calculates percentage and updates the progress bar width and text.
+
+🔑 Concepts:
+-function: declares a reusable block of code.
+
+-querySelectorAll(): gets all matching elements.
+
+-.length: counts how many items.
+
+-style.width: changes CSS style using JS.
+
+-? : is a ternary operator (short if-else).
+
+-textContent: updates text inside an element.
+```
 
 ---
 
@@ -143,8 +195,15 @@ function saveToLocalStorage() {
   localStorage.setItem("allGoals", JSON.stringify(allGoals));
 }
 ```
-- Saves all goals to browser memory.
+```
+✅ What it does:
+-Saves the current task object to browser storage after converting it to a string.
 
+🔑 Methods:
+-.setItem(key, value): stores data.
+
+-JSON.stringify(): converts JS object to string for saving.
+```
 ---
 
 ### Create Goal Element
@@ -187,6 +246,26 @@ function createGoalElement(id, name = "", completed = false) {
     updateProgress();
   });
 ```
+```
+✅ Steps:
+
+-Only allows marking complete if all inputs are filled.
+
+-Toggles the .completed class visually.
+
+-Updates storage and progress bar.
+
+🔑 Keywords:
+-.addEventListener(): sets up click or input events.
+
+-.every(): checks if all inputs are filled.
+
+-.classList.toggle(): adds or removes a class.
+
+-.trim(): removes whitespace from a string.
+
+
+```
 
 #### Input Handler
 
@@ -216,7 +295,15 @@ function createGoalElement(id, name = "", completed = false) {
   return goal;
 }
 ```
+```
+✅ Adds a fade-out class (assumed animated in CSS), then:
 
+-Deletes element after 300ms,
+
+-Removes from memory (delete allGoals[id]),
+
+-Saves the updated list and refreshes progress bar.
+```
 ---
 
 ### Render Saved Goals
@@ -245,7 +332,15 @@ addGoalBtn.addEventListener("click", () => {
   saveToLocalStorage();
 });
 ```
+```
+✅ When user clicks Add Task:
 
+Generates a unique ID using current time (Date.now()),
+
+Adds it to storage,
+
+Creates and displays a new input field.
+```
 ---
 
 ## ✅ Summary: JavaScript Concepts Used
