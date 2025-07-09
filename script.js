@@ -1,16 +1,13 @@
-// Load existing goals or initialize empty object
+// Load goals from localStorage or initialize with an empty object
 const allGoals = JSON.parse(localStorage.getItem("allGoals")) || {};
 
-// DOM Selections
+// Select DOM elements
 const progressBar = document.querySelector(".progress-bar");
 const progressValue = document.querySelector(".progress-value");
 const goalWrapper = document.querySelector(".goleWrapper");
 const addGoalBtn = document.querySelector(".add-goal-btn");
-const progressLabel = document.querySelector(".progress-Label");
 
-
-
-// Function to update progress bar
+// Function to update the progress bar display
 function updateProgress() {
   const total = document.querySelectorAll(".goleContainer").length;
   const completed = document.querySelectorAll(
@@ -18,6 +15,7 @@ function updateProgress() {
   ).length;
   const percent = (completed / total) * 100;
 
+  // Update the width and visibility of the progress bar
   progressValue.style.width = `${percent}%`;
   progressValue.style.visibility = completed > 0 ? "visible" : "hidden";
   progressValue.querySelector(
@@ -25,17 +23,20 @@ function updateProgress() {
   ).textContent = `${completed}/${total} completed`;
 }
 
-// Function to save allGoals to localStorage
+// Save current goals to localStorage
 function saveToLocalStorage() {
   localStorage.setItem("allGoals", JSON.stringify(allGoals));
 }
 
-// Function to create a new goal element
+// Create a new task/goal element
 function createGoalElement(id, name = "", completed = false) {
   const goal = document.createElement("div");
   goal.className = "goleContainer";
+
+  // Add completed class if goal is marked completed
   if (completed) goal.classList.add("completed");
 
+  // Task template
   goal.innerHTML = `
     <div class="checkBox">
       <img src="images/check-icon.svg" alt="check-icon" class="check-icon">
@@ -44,10 +45,12 @@ function createGoalElement(id, name = "", completed = false) {
     <button class="delete-btn" title="Delete Task">❌</button>
   `;
 
+  // Get inner elements
   const checkbox = goal.querySelector(".checkBox");
   const input = goal.querySelector(".goleInput");
   const deleteBtn = goal.querySelector(".delete-btn");
 
+  // Handle checkbox click (complete/uncomplete)
   checkbox.addEventListener("click", () => {
     const inputs = document.querySelectorAll(".goleInput");
     const allFilled = [...inputs].every((inp) => inp.value.trim() !== "");
@@ -64,10 +67,12 @@ function createGoalElement(id, name = "", completed = false) {
     updateProgress();
   });
 
+  // Remove error when user starts typing again
   input.addEventListener("focus", () => {
     progressBar.classList.remove("showError");
   });
 
+  // Save input changes to localStorage
   input.addEventListener("input", () => {
     allGoals[id] = {
       name: input.value,
@@ -76,36 +81,33 @@ function createGoalElement(id, name = "", completed = false) {
     saveToLocalStorage();
   });
 
+  // Delete task with fade-out animation
   deleteBtn.addEventListener("click", () => {
-    // Add fade-out class
     goal.classList.add("fade-out");
 
-    // Wait for animation to finish before removing
     setTimeout(() => {
       goal.remove();
       delete allGoals[id];
       saveToLocalStorage();
       updateProgress();
-    }, 300); // Match the CSS transition time
+    }, 300); // 300ms should match CSS transition time
   });
-  
 
   return goal;
 }
 
-
-// Initial Rendering
-
+// Render saved goals from localStorage
 Object.entries(allGoals).forEach(([id, data]) => {
   const goal = createGoalElement(id, data.name, data.completed);
   goalWrapper.insertBefore(goal, addGoalBtn);
 });
 
+// Initial progress update
 updateProgress();
 
-// Add new goal
+// Handle "Add Task" button click
 addGoalBtn.addEventListener("click", () => {
-  const newId = `goal_${Date.now()}`; // Unique ID based on timestamp
+  const newId = `goal_${Date.now()}`; // Unique ID using timestamp
   allGoals[newId] = { name: "", completed: false };
   const newGoal = createGoalElement(newId);
   goalWrapper.insertBefore(newGoal, addGoalBtn);
